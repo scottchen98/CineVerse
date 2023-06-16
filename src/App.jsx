@@ -4,8 +4,6 @@ import { useMovies } from "./useMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
 import { useKey } from "./useKey";
 
-const OMDB_API_KEY = import.meta.env.VITE_OMDB_API_KEY;
-
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
@@ -206,7 +204,9 @@ function MovieDetails({ watched, selectedId, onCloseMovie, onAddWatched }) {
       try {
         setIsLoading(true);
         const res = await fetch(
-          `https://omdbapi.com/?apikey=${OMDB_API_KEY}&i=${selectedId}`
+          `https://omdbapi.com/?apikey=${
+            import.meta.env.VITE_OMDB_API_KEY
+          }&i=${selectedId}`
         );
 
         if (!res.ok)
